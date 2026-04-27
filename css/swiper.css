@@ -97,3 +97,82 @@
   font-weight: 600; font-size: 15px; display: inline-flex; align-items: center;
   gap: 8px; flex: 1; justify-content: center;
 }
+
+/* Адаптивные размеры карточек */
+@media (max-width: 480px) {
+  .cards-area {
+    max-width: 100%;
+    height: 450px;
+  }
+
+  .card-photo {
+    height: 280px;
+  }
+
+  .card-info {
+    padding: 12px;
+  }
+
+  .card-name {
+    font-size: 18px;
+  }
+
+  .card-city {
+    font-size: 12px;
+  }
+
+  .card-games {
+    font-size: 12px;
+  }
+
+  .card-bio {
+    font-size: 13px;
+    -webkit-line-clamp: 1;
+  }
+
+  .swipe-hint {
+    font-size: 12px;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .cards-area {
+    max-width: 100%;
+    height: 480px;
+  }
+
+  .card-photo {
+    height: 320px;
+  }
+}
+
+@media (min-width: 769px) {
+  .cards-area {
+    max-width: 420px;
+    height: 540px;
+  }
+
+  .card-photo {
+    height: 360px;
+  }
+}
+
+@media (max-height: 600px) {
+  .cards-area {
+    height: 320px;
+  }
+
+  .card-photo {
+    height: 200px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .action-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
