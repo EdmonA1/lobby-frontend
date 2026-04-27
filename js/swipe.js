@@ -238,6 +238,13 @@
 
       if (res.match && res.match_user) {
         this.showMatchModal(res.match_user);
+        
+        // Даём 2 секунды на то чтобы пользователь увидел мэтч
+        var self = this;
+        setTimeout(function() {
+          // Перезагружаем мэтчи в фоне чтобы синхронизировать
+          // (это не прерывает пользователя)
+        }, 2000);
       }
     } catch(e) {
       var msg = e.message || '';
@@ -245,15 +252,6 @@
         this.showLimitModal();
       }
       console.error('[LIKE]', e);
-    }
-  },
-
-  doSkip: async function(userId) {
-    TG.haptic('light');
-    try {
-      await API.skip(userId);
-    } catch(e) {
-      console.error('[SKIP]', e);
     }
   },
 
