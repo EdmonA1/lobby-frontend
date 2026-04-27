@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lobby — Мэтчи</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/animations.css">
+<style>
+.matches-list { display:flex; flex-direction:column; gap:12px; }
+.match-card {
+  display:flex; align-items:center; gap:14px;
+  background:var(--card); border-radius:16px; padding:14px;
+  animation:fadeIn 0.3s ease; transition:transform 0.2s ease;
+}
+.match-card:active { transform:scale(0.98); }
+.match-photo { width:64px; height:64px; border-radius:50%; background-size:cover; background-position:center; background-color:var(--card2); flex-shrink:0; border:2px solid var(--primary); }
+.match-info { flex:1; min-width:0; }
+.match-name { font-size:16px; font-weight:700; }
+.match-city { font-size:13px; color:var(--text-muted); margin-top:2px; }
+.match-games { font-size:12px; color:var(--text-muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.match-date { font-size:11px; color:var(--primary); margin-top:4px; }
+.match-actions { flex-shrink:0; }
+.btn-write {
+  display:flex; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(255,107,157,0.15); color:var(--primary); font-size:20px;
+  text-decoration:none; border:2px solid rgba(255,107,157,0.3); transition:0.2s;
+}
+.btn-write:hover { background:var(--primary); color:#fff; }
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="page">
+  <div style="padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);">
+    <button class="btn btn-ghost btn-icon" onclick="window.location.href='swipe.html'" style="font-size:18px;">←</button>
+    <h1 style="font-size:18px;font-weight:700;">💚 Мои мэтчи</h1>
+    <div style="width:40px;"></div>
+  </div>
+  <div class="page-content">
+    <div id="loader" style="display:flex;align-items:center;justify-content:center;height:200px;flex-direction:column;gap:16px;">
+      <div class="loader-spinner"></div>
+      <span style="color:var(--text-muted);">Загрузка...</span>
+    </div>
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-icon animate-float">💔</div>
+      <div class="empty-title">Мэтчей пока нет</div>
+      <div class="empty-desc">Лайкай анкеты — и мэтчи не заставят ждать!</div>
+      <button class="btn btn-primary" onclick="window.location.href='swipe.html'" style="margin-top:16px;">🎮 Искать игроков</button>
+    </div>
+    <div id="matches-list" class="matches-list stagger-children"></div>
+  </div>
+  <nav class="nav-bar">
+    <div class="nav-item" data-page="swipe.html"><span class="nav-icon">🃏</span><span>Поиск</span></div>
+    <div class="nav-item active" data-page="matches.html"><span class="nav-icon">💚</span><span>Мэтчи</span></div>
+    <div class="nav-item" data-page="profile.html"><span class="nav-icon">👤</span><span>Профиль</span></div>
+  </nav>
+</div>
+<script src="./js/config.js"></script>
+<script src="./js/telegram.js"></script>
+<script src="./js/api.js"></script>
+<script src="./js/matches.js"></script>
+<script>
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function() { var p = item.dataset.page; if (p) window.location.href = p; });
+  });
+</script>
+</body>
+</html>

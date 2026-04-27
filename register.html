@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lobby — Регистрация</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/animations.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="page">
+  <div style="padding:16px 16px 0;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span id="step-counter" style="font-size:13px;color:var(--text-muted);font-weight:600;">1 / 10</span>
+      <span class="logo" style="font-size:20px;">Lobby</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="page-content" style="padding-top:24px;">
+
+    <div class="reg-step active" id="step-1">
+      <div style="font-size:32px;text-align:center;">👋</div>
+      <h2 style="text-align:center;font-size:22px;">Как тебя зовут?</h2>
+      <p style="text-align:center;color:var(--text-muted);font-size:14px;">Имя будет видно другим игрокам</p>
+      <div class="input-group">
+        <label class="input-label">Имя</label>
+        <input class="input" id="input-name" type="text" placeholder="Введи своё имя" maxlength="30" autocomplete="given-name">
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-2">
+      <div style="font-size:32px;text-align:center;">🎂</div>
+      <h2 style="text-align:center;font-size:22px;">Сколько тебе лет?</h2>
+      <p style="text-align:center;color:var(--text-muted);font-size:14px;">Только для совершеннолетних</p>
+      <div class="input-group">
+        <label class="input-label">Возраст (18–60)</label>
+        <input class="input" id="input-age" type="number" placeholder="22" min="18" max="60">
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-3">
+      <div style="font-size:32px;text-align:center;">⚡</div>
+      <h2 style="text-align:center;font-size:22px;">Ты...</h2>
+      <div style="display:flex;gap:12px;">
+        <button class="gender-btn" data-value="male">👦 Парень</button>
+        <button class="gender-btn" data-value="female">👧 Девушка</button>
+      </div>
+      <button class="gender-btn" data-value="other" style="text-align:center;">🏳️‍🌈 Другое</button>
+    </div>
+
+    <div class="reg-step" id="step-4">
+      <div style="font-size:32px;text-align:center;">🌆</div>
+      <h2 style="text-align:center;font-size:22px;">Из какого города?</h2>
+      <div class="input-group">
+        <label class="input-label">Город</label>
+        <input class="input" id="input-city" type="text" placeholder="Москва" list="city-datalist" autocomplete="off">
+        <datalist id="city-datalist"></datalist>
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-5">
+      <div style="font-size:32px;text-align:center;">🎮</div>
+      <h2 style="text-align:center;font-size:22px;">В какие игры играешь?</h2>
+      <p style="text-align:center;color:var(--text-muted);font-size:14px;">Выбери хотя бы одну</p>
+      <div class="games-wrap" id="games-container"></div>
+    </div>
+
+    <div class="reg-step" id="step-6">
+      <div style="font-size:32px;text-align:center;">📸</div>
+      <h2 style="text-align:center;font-size:22px;">Твоё фото</h2>
+      <div style="background:var(--card);border-radius:16px;padding:24px;text-align:center;border:2px dashed rgba(255,107,157,0.3);">
+        <div style="font-size:48px;">🖼️</div>
+        <p style="color:var(--text-muted);margin-top:8px;font-size:14px;">Загрузка фото будет в следующей версии</p>
+        <p style="color:var(--primary);font-size:13px;margin-top:8px;">Пока используется аватар Telegram</p>
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-7">
+      <div style="font-size:32px;text-align:center;">✍️</div>
+      <h2 style="text-align:center;font-size:22px;">Расскажи о себе</h2>
+      <div class="input-group">
+        <label class="input-label">Описание (необязательно)</label>
+        <textarea class="input" id="input-bio" placeholder="Играю каждый вечер, ищу тиммейтов в CS2..." maxlength="300"></textarea>
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-8">
+      <div style="font-size:32px;text-align:center;">🎧</div>
+      <h2 style="text-align:center;font-size:22px;">Discord</h2>
+      <p style="text-align:center;color:var(--text-muted);font-size:14px;">Необязательно</p>
+      <div class="input-group">
+        <label class="input-label">Никнейм в Discord</label>
+        <input class="input" id="input-discord" type="text" placeholder="username или username#1234">
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-9">
+      <div style="font-size:32px;text-align:center;">🔍</div>
+      <h2 style="text-align:center;font-size:22px;">Что ищешь?</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--card);padding:14px;border-radius:12px;">
+          <input type="checkbox" class="looking-check" value="teammate" style="width:18px;height:18px;accent-color:var(--primary);"> 🎮 Тиммейта
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--card);padding:14px;border-radius:12px;">
+          <input type="checkbox" class="looking-check" value="chat" style="width:18px;height:18px;accent-color:var(--primary);"> 💬 Общение
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--card);padding:14px;border-radius:12px;">
+          <input type="checkbox" class="looking-check" value="friend" style="width:18px;height:18px;accent-color:var(--primary);"> 👥 Друзей
+        </label>
+        <label style="display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--card);padding:14px;border-radius:12px;">
+          <input type="checkbox" class="looking-check" value="relationship" style="width:18px;height:18px;accent-color:var(--primary);"> ❤️ Отношения
+        </label>
+      </div>
+    </div>
+
+    <div class="reg-step" id="step-10">
+      <div style="font-size:32px;text-align:center;">⚙️</div>
+      <h2 style="text-align:center;font-size:22px;">Настройки поиска</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">Показывать</p>
+          <div style="display:flex;gap:8px;">
+            <button class="filter-gender-btn selected" data-value="any">Всех</button>
+            <button class="filter-gender-btn" data-value="male">Парней</button>
+            <button class="filter-gender-btn" data-value="female">Девушек</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <div class="input-group" style="flex:1;">
+            <label class="input-label">Возраст от</label>
+            <input class="input" id="filter-age-min" type="number" value="18" min="18" max="60">
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label class="input-label">до</label>
+            <input class="input" id="filter-age-max" type="number" value="35" min="18" max="60">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="padding:16px;display:flex;flex-direction:column;gap:8px;">
+    <button class="btn btn-primary w-full" id="btn-next">Далее →</button>
+    <button class="btn btn-ghost w-full" id="btn-back" style="display:none;">← Назад</button>
+  </div>
+</div>
+<script src="./js/config.js"></script>
+<script src="./js/telegram.js"></script>
+<script src="./js/api.js"></script>
+<script src="./js/register.js"></script>
+</body>
+</html>

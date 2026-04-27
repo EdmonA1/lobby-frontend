@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lobby — Поиск</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/swiper.css">
+<link rel="stylesheet" href="./css/animations.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="page">
+  <div class="swipe-header">
+    <span class="header-logo">🎮 Lobby</span>
+    <span class="likes-counter" id="likes-counter">10 лайков</span>
+    <button class="btn btn-ghost btn-icon" onclick="window.location.href='profile.html'" style="width:40px;height:40px;font-size:18px;">👤</button>
+  </div>
+
+  <div class="swipe-container">
+    <div class="cards-area">
+      <div id="loader" class="hidden" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;">
+        <div class="loader-spinner"></div>
+        <span style="color:var(--text-muted);font-size:14px;">Ищем игроков...</span>
+      </div>
+      <div id="cards-container"></div>
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon animate-float">😴</div>
+        <div class="empty-title">Анкеты закончились</div>
+        <div class="empty-desc">Новые игроки появляются каждый день!</div>
+        <button class="btn btn-primary" onclick="SwipeApp.loadUsers()" style="margin-top:8px;">🔄 Обновить</button>
+      </div>
+    </div>
+
+    <div class="swipe-hint">
+      <span class="hint-left">👈 Пропустить</span>
+      <span style="color:var(--text-muted);">|</span>
+      <span class="hint-right">Лайк 👉</span>
+    </div>
+
+    <div class="action-buttons">
+      <button class="action-btn btn-skip"  onclick="SwipeApp.skipBtn()" title="Пропустить">✕</button>
+      <button class="action-btn btn-like"  onclick="SwipeApp.likeBtn()" title="Лайк">♥</button>
+      <button class="action-btn btn-super" onclick="SwipeApp.loadUsers()" title="Обновить">🔄</button>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <div class="nav-item active" data-page="swipe.html"><span class="nav-icon">🃏</span><span>Поиск</span></div>
+    <div class="nav-item" data-page="matches.html"><span class="nav-icon">💚</span><span>Мэтчи</span></div>
+    <div class="nav-item" data-page="profile.html"><span class="nav-icon">👤</span><span>Профиль</span></div>
+  </nav>
+</div>
+
+<div class="modal-overlay hidden" id="match-modal">
+  <div class="modal animate-scale">
+    <div class="match-modal-content">
+      <div style="font-size:40px;">🎉</div>
+      <div class="match-title">Мэтч!</div>
+      <div class="match-subtitle">Вы понравились друг другу!</div>
+      <div class="match-photo-container">
+        <div class="match-photo-big" id="match-user-photo"></div>
+        <div class="match-heart">💚</div>
+      </div>
+      <div class="match-user-name-big" id="match-user-name"></div>
+      <div style="color:var(--text-muted);font-size:14px;">
+        <span id="match-user-age"></span> лет &middot; 📍 <span id="match-user-city"></span>
+      </div>
+      <div class="match-actions-row">
+        <a class="btn-write" id="match-write-btn" href="#" target="_blank" style="display:none;">💬 Написать</a>
+        <button class="btn btn-outline" onclick="SwipeApp.closeMatchModal()" style="flex:1;">Продолжить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="limit-modal">
+  <div class="modal animate-scale">
+    <div style="font-size:40px;margin-bottom:8px;">😢</div>
+    <h3 style="font-size:20px;margin-bottom:8px;">Лимит лайков</h3>
+    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:20px;">
+      На сегодня лайки закончились. Возвращайся завтра!
+    </p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <button class="btn btn-primary w-full">⭐ Premium — безлимит</button>
+      <button class="btn btn-ghost w-full" onclick="SwipeApp.closeLimitModal()">Понятно</button>
+    </div>
+  </div>
+</div>
+
+<script src="./js/config.js"></script>
+<script src="./js/telegram.js"></script>
+<script src="./js/api.js"></script>
+<script src="./js/swipe.js"></script>
+</body>
+</html>

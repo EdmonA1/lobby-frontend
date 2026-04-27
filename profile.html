@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lobby — Профиль</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/animations.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="page">
+  <div style="padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06);">
+    <button class="btn btn-ghost btn-icon" onclick="window.location.href='swipe.html'" style="font-size:18px;">←</button>
+    <h1 style="font-size:18px;font-weight:700;">Мой профиль</h1>
+    <button class="btn btn-ghost btn-icon" id="edit-btn" style="font-size:18px;">✏️</button>
+  </div>
+
+  <div class="page-content animate-fade">
+    <div id="view-mode">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px 0;">
+        <div id="prof-photo" style="width:120px;height:120px;border-radius:50%;background:var(--card2);background-size:cover;background-position:center;border:3px solid var(--primary);"></div>
+        <div style="text-align:center;">
+          <div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+            <span id="prof-name" style="font-size:24px;font-weight:800;">Загрузка...</span>
+            <span id="prof-premium" class="premium-badge" style="display:none;">⭐ PRO</span>
+          </div>
+          <div style="color:var(--text-muted);margin-top:4px;" id="prof-city">📍 —</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card">
+          <div style="font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">О себе</div>
+          <p id="prof-bio" style="font-size:15px;line-height:1.6;color:var(--text-muted);">—</p>
+        </div>
+        <div class="card">
+          <div style="font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">🎮 Игры</div>
+          <p id="prof-games" style="font-size:15px;color:var(--text);">—</p>
+        </div>
+        <div class="card">
+          <div style="font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">🔍 Ищу</div>
+          <p id="prof-looking" style="font-size:15px;color:var(--text);">—</p>
+        </div>
+        <div class="card">
+          <div style="font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">🎧 Discord</div>
+          <p id="prof-discord" style="font-size:15px;color:var(--text);">—</p>
+        </div>
+        <button class="btn btn-outline w-full" onclick="localStorage.clear();window.location.href='index.html'">Выйти</button>
+      </div>
+    </div>
+
+    <div id="edit-mode" class="hidden animate-fade">
+      <h2 style="font-size:20px;font-weight:700;margin-bottom:20px;">Редактировать</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="input-group">
+          <label class="input-label">Имя</label>
+          <input class="input" id="edit-name" type="text" maxlength="30">
+        </div>
+        <div style="display:flex;gap:12px;">
+          <div class="input-group" style="flex:1;">
+            <label class="input-label">Возраст</label>
+            <input class="input" id="edit-age" type="number" min="18" max="60">
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label class="input-label">Город</label>
+            <input class="input" id="edit-city" type="text">
+          </div>
+        </div>
+        <div>
+          <p class="input-label" style="margin-bottom:8px;">Пол</p>
+          <div style="display:flex;gap:8px;">
+            <button class="edit-gender-btn gender-btn" data-value="male">👦 Парень</button>
+            <button class="edit-gender-btn gender-btn" data-value="female">👧 Девушка</button>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">О себе</label>
+          <textarea class="input" id="edit-bio" maxlength="300"></textarea>
+        </div>
+        <div>
+          <p class="input-label" style="margin-bottom:8px;">Игры</p>
+          <div class="games-wrap" id="edit-games-container"></div>
+        </div>
+        <div>
+          <p class="input-label" style="margin-bottom:8px;">Что ищу</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" class="edit-looking-check" value="teammate" style="accent-color:var(--primary);"> 🎮 Тиммейт</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" class="edit-looking-check" value="chat" style="accent-color:var(--primary);"> 💬 Общение</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" class="edit-looking-check" value="friend" style="accent-color:var(--primary);"> 👥 Друзья</label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" class="edit-looking-check" value="relationship" style="accent-color:var(--primary);"> ❤️ Отношения</label>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Discord</label>
+          <input class="input" id="edit-discord" type="text" placeholder="username">
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" id="save-btn" style="flex:1;">Сохранить</button>
+          <button class="btn btn-ghost" id="cancel-edit-btn" style="flex:1;">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <div class="nav-item" data-page="swipe.html"><span class="nav-icon">🃏</span><span>Поиск</span></div>
+    <div class="nav-item" data-page="matches.html"><span class="nav-icon">💚</span><span>Мэтчи</span></div>
+    <div class="nav-item active" data-page="profile.html"><span class="nav-icon">👤</span><span>Профиль</span></div>
+  </nav>
+</div>
+<script src="./js/config.js"></script>
+<script src="./js/telegram.js"></script>
+<script src="./js/api.js"></script>
+<script src="./js/profile.js"></script>
+<script>
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function() { var p = item.dataset.page; if (p) window.location.href = p; });
+  });
+</script>
+</body>
+</html>
