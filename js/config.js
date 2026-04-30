@@ -1,5 +1,5 @@
 ﻿const CONFIG = {
-  API_URL: 'https://lobby-backend-production.up.railway.app/api',
+  API_URL: 'https://web-production-a832.up.railway.app/api',
   FREE_LIKES_PER_DAY: 10,
   GAMES_LIST: [
     'CS2','Dota 2','Valorant','League of Legends','Fortnite',
